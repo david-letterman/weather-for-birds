@@ -22,24 +22,24 @@ def get_bird(state: str):
 
 
 def get_weather(state: str):
-    r = requests.get(f'https://api.weather.gov/alerts/active?area={{abbreviation}}')
+    r = requests.get(f"https://api.weather.gov/alerts/active?area={{abbreviation}}")
     return r.json()
 
 
-@app.get('/')
+@app.get("/")
 def hello():
-    return "Add a 2 letter state param to learn about birds and the weather challenges they face.", \
-           200, \
-           {'Content-Type': 'text/html; charset=utf-8'}
+    return (
+        "Add a 2 letter state param to learn about birds and the weather challenges they face.",
+        200,
+        {"Content-Type": "text/html; charset=utf-8"},
+    )
 
 
-@app.get('/<state>')
+@app.get("/<state>")
 def bird(state):
-
     bird = get_bird(state)
     print(bird)
     weather = get_weather(state)
     print(weather)
     out = str([bird, weather])
-    return out, 200, {'Content-Type': 'application/json'}
-
+    return out, 200, {"Content-Type": "application/json"}
