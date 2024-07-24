@@ -8,7 +8,7 @@ An API that returns information about birds and the weather.
 
 - [Docker] 24+
 - [Kubernetes] 1.30+
-- [Python] 3.10+
+- [Python] 3.12+
 
 ### Development and testing
 
