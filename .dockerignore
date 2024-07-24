@@ -1,0 +1,10 @@
+.dockerignore
+.editorconfig
+.github/
+.gitignore
+CHANGELOG.md
+Dockerfile
+Makefile
+README.md
+helm/
+venv/
