@@ -1,5 +1,7 @@
 # Weather for Birds
 
+![CI](https://github.com/david-letterman/weather-for-birds/actions/workflows/ci.yaml/badge.svg)
+
 An API that returns information about birds and the weather.
 
 ## Getting started
