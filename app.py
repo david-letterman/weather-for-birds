@@ -1,8 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify
+
 import requests
 import json
 import sqlite3
-
 
 app = Flask(__name__)
 
@@ -22,24 +22,27 @@ def get_bird(state: str):
 
 
 def get_weather(state: str):
-    r = requests.get(f"https://api.weather.gov/alerts/active?area={{abbreviation}}")
+    r = requests.get(f"https://api.weather.gov/alerts/active?area={state}")
     return r.json()
 
 
 @app.get("/")
 def hello():
     return (
-        "Add a 2 letter state param to learn about birds and the weather challenges they face.",
+        "Choose a state to learn about birds and the weather "
+        "challenges they face.",
         200,
-        {"Content-Type": "text/html; charset=utf-8"},
+        {"content-type": "text/html; charset=utf-8"},
     )
 
 
-@app.get("/<state>")
+@app.get("/<string:state>")
 def bird(state):
-    bird = get_bird(state)
-    print(bird)
-    weather = get_weather(state)
-    print(weather)
-    out = str([bird, weather])
-    return out, 200, {"Content-Type": "application/json"}
+    bird_data = get_bird(state)
+    weather_data = get_weather(state)
+    return jsonify(
+        {
+            "bird": bird_data,
+            "weather": weather_data,
+        }
+    )
