@@ -1,14 +1,13 @@
 from flask import Flask, jsonify
 
 import requests
-import json
 import sqlite3
 
 app = Flask(__name__)
 
 
 def get_bird(state: str):
-    conn = sqlite3.connect("./birds.db")
+    conn = sqlite3.connect("birds.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     print(f"select * from birds where abbreviation = '{state}';")
@@ -18,7 +17,7 @@ def get_bird(state: str):
     for item in res:
         print(item)
         list_accumulator.append({k: item[k] for k in item.keys()})
-    return json.dumps(list_accumulator)
+    return list_accumulator
 
 
 def get_weather(state: str):
